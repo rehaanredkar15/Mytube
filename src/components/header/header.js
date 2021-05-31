@@ -1,8 +1,8 @@
 import React from "react";
-//import "./_header.scss";
+import "./_header.scss";
 
 const Header = () => {
-  return <div>Header this is header</div>;
+  return <div className="border border-dark">Header this is header</div>;
 };
 
 export default Header;
