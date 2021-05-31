@@ -1,0 +1,29 @@
+@import '../../base.scss';
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: $black-primary;
+    height: 10vh;
+    width: 100%;
+    &__menu {
+        display: none;
+    }
+    &__logo {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        display: block;
+        font-family: 'Pattaya', sans-serif;
+    }
+    form {
+        flex: 0.6;
+        display: flex;
+        padding: 0.1rem;
+        margin: 0.1rem;
+        border-radius: 3px;
+        border: 1.2px solid;
+        background-color: $black-secondary;
+    }
+}
