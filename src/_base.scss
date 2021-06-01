@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 $text-color: #b1bdb4;
-$black-primary: #16181b;
+$black-primary: #1c1d1f;
 $black-secondary:#121417;
 $border-color:#4c4c4c;
 $breakpoint-medium:1224px;
@@ -15,6 +15,5 @@ body {
     background: $black-primary;
     background-attachment: fixed;
     color: $text-color;
-    font-family: 'Baloo Tammudu 2', cursive;
     letter-spacing: 0.1px;
 }

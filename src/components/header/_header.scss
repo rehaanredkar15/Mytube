@@ -2,17 +2,18 @@
 .header {
     display: flex;
     justify-content: space-between;
+    font-weight: 1000;
     align-items: center;
     padding: 1rem 3rem;
-    background-color: $black-primary;
+    background-color: #070707;
     height: 10vh;
     width: 100%;
     &__menu {
         display: none;
     }
     &__logo {
-        width: 30px;
-        height: 30px;
+        width: 100px;
+        height: 80px;
         object-fit: contain;
         display: block;
         font-family: 'Pattaya', sans-serif;
@@ -25,5 +26,56 @@
         border-radius: 3px;
         border: 1.2px solid;
         background-color: $black-secondary;
+        input {
+            width: 100%;
+            border: none;
+            font-weight: 500;
+            background: transparent;
+            padding: 0.3em;
+            color: $text-color;
+            &:focus {
+                outline: none;
+            }
+        }
+        button {
+            padding: 0 1.25rem;
+            color: $text-color;
+            background: transparent;
+            border: none;
+            &:focus {
+                border: none;
+            }
+        }
+    }
+    &__icons {
+        flex: 0.15;
+        display: flex;
+        object-fit: contain;
+        justify-content: space-around;
+        align-items: center;
+        img {
+            border-radius: 50%;
+            width: 40px;
+            object-fit: contain;
+            margin-left: 5px;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-small) {
+    .header {
+        padding: 1rem;
+        form {
+            flex: 0.5;
+        }
+        &__menu {
+            display: block;
+        }
+        &__logo {
+            display: none;
+        }
+        &__icons>*:not(img) {
+            display: none;
+        }
     }
 }
