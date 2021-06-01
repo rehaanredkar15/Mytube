@@ -9,9 +9,12 @@ import {
   MdHistory,
 } from "react-icons/md";
 
-const Sidebar = () => {
+const Sidebar = ({ sidebar, handleToggle }) => {
   return (
-    <nav className="border border-danger sidebar">
+    <nav
+      className={sidebar ? "sidebar open" : "sidebar"}
+      onClick={() => handleToggle(false)}
+    >
       <ul>
         <MdHome size={23} className="sidebar__icons" />
         <p>Home</p>
