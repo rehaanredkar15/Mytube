@@ -13,9 +13,9 @@ const App = () => {
   return (
     <>
       <Header handleToggle={handleToggle} />
-      <div className="app__container border border-info">
+      <div className="app__container">
         <Sidebar sidebar={sidebar} handleToggle={handleToggle} />
-        <Container fluid className="app_main border border-warning">
+        <Container fluid className="app_main">
           <Homescreen />
         </Container>
       </div>

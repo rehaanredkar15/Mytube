@@ -1,0 +1,29 @@
+@import '../../base.scss';
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital@1&display=swap');
+.Categories {
+    padding: 0.5rem 0;
+    font-size: 0.8rem;
+    display: flex;
+    overflow-x: scroll;
+    font-family: 'Kanit', sans-serif;
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+    scrollbar-width: none;
+    span {
+        margin-right: 1rem;
+        background-color: #2e2d2d;
+        padding: 0.5rem;
+        white-space: nowrap;
+        border: 1.5px solid $text-color;
+        border-radius: 999px;
+        &:hover {
+            background-color: #374a59;
+        }
+        &.active {
+            color: #fff;
+            background-color: #525050;
+            border-color: $border-color;
+        }
+    }
+}

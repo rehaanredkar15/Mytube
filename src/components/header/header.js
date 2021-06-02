@@ -7,7 +7,7 @@ import { MdNotifications, MdApps } from "react-icons/md";
 //handletoggle was the function passed as props
 const Header = ({ handleToggle }) => {
   return (
-    <div className="border border-dark header">
+    <div className=" header">
       <FaBars
         className="header__menu"
         size={26}

@@ -31,6 +31,10 @@
             color: red;
             //  margin-left: 12px;
         }
+        &__icons:hover {
+            color: white;
+            cursor: pointer;
+        }
         &.open {
             transform: translateX(0);
         }

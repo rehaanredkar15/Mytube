@@ -1,7 +1,49 @@
-import React from "react";
-//import "./_categories.scss";
+import React, { useState } from "react";
+import "./_categories.scss";
+
+const keywords = [
+  "All",
+  "Live",
+  "Mixes",
+  "Music",
+  "PUBG",
+  "Javascript",
+  "Cricket",
+  "Python",
+  "Science Fiction",
+  "Comedies",
+  "Superheroes",
+  "Web series",
+  "Dr DisRespect",
+  "Film criticisms",
+  "Bitcoin",
+  "Thrillers",
+  "Courses",
+];
+
 const Categories = () => {
-  return <div>this is the Categories</div>;
+  //Keys help React identify which items have changed, are added,
+  // or are removed. Keys should be given
+  //to the elements inside the array to give the elements a stable identity
+
+  const [activestate, setactivestate] = useState("All");
+
+  const handleclick = (value) => {
+    setactivestate(value);
+  };
+  return (
+    <div className="Categories">
+      {keywords.map((value, i) => (
+        <span
+          onClick={() => handleclick(value)}
+          key={i}
+          className={activestate === value ? "active" : ""}
+        >
+          {value}
+        </span>
+      ))}
+    </div>
+  );
 };
 
 export default Categories;
