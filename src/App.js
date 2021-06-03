@@ -4,21 +4,28 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
+import LoginScreen from "./screens/Loginscreen/Loginscreen";
 
-const App = () => {
+const Layout = ({children}) => {
   const [sidebar, toggleSidebar] = useState(false);
 
   const handleToggle = () => toggleSidebar((value) => !value);
 
   return (
-    <>
-      <Header handleToggle={handleToggle} />
+     <Header handleToggle={handleToggle} />
       <div className="app__container">
         <Sidebar sidebar={sidebar} handleToggle={handleToggle} />
         <Container fluid className="app_main">
-          <Homescreen />
+         {children}
         </Container>
-      </div>
+      </div> 
+  );
+};
+
+const App = () => {
+  return (
+    <>
+      <LoginScreen />
     </>
   );
 };

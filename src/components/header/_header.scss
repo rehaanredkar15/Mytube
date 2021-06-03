@@ -8,6 +8,7 @@
     background-color: #070707;
     height: 10vh;
     width: 100%;
+    z-index: 999;
     &__menu {
         display: none;
     }
@@ -50,7 +51,7 @@
     &__icons {
         flex: 0.15;
         display: flex;
-        object-fit: contain;
+        // object-fit: contain;
         justify-content: space-around;
         align-items: center;
         img {

@@ -21,9 +21,9 @@
         }
     }
     &__title {
-        margin-top: 1rem;
         margin-bottom: 0.1rem;
         color: #fff;
+        @include line-clamp(1);
     }
     &__details {
         display: flex;
@@ -41,7 +41,7 @@
             cursor: pointer;
         }
         p {
-            margin-bottom: 0px;
+            margin-bottom: 0;
         }
     }
 }
