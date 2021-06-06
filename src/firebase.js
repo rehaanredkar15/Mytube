@@ -1,4 +1,5 @@
 import  firebase from "firebase";
+import 'firebase/auth';
 const firebaseConfig = {
   apiKey: "AIzaSyBXN6Uf4dAkZCyImcGynVuqC4ZarpLqwCA",
   authDomain: "nottube-2.firebaseapp.com",
@@ -9,3 +10,5 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig)
+
+export default firebase.auth()
