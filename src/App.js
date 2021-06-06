@@ -6,7 +6,7 @@ import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
 
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch, Link, Redirect } from "react-router-dom";
 
 
 
@@ -32,18 +32,18 @@ const Layout = ({ children }) => {
 const App = () => {
   return (
     <Router>
-      
-      <Switch>
+        
+
+        <Switch>
+       
       <Route  path ='/' exact>
       <Layout>
           <Homescreen/>
       </Layout>
       </Route>
 
-      <Route path = '/auth'>
-      
+      <Route path = '/auth'>     
       <LoginScreen />
-      
       </Route>
 
       <Route path = '/search'>
@@ -57,7 +57,7 @@ const App = () => {
         <Redirect to ='/' />
       </Route>
 
-    </Switch>
+     </Switch>
     </Router>
   );
 };
