@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./components/header/header";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
-
 import { BrowserRouter as Router, Route,Switch, Link, Redirect } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 
 
@@ -30,12 +30,20 @@ const Layout = ({ children }) => {
 };
 
 const App = () => {
-  return (
-    <Router>
-        
 
-        <Switch>
-       
+  const {accessToken,loading}  = useSelector(state => state.auth)
+   
+   const  history = useHistory()
+   useEffect(() => {
+ 
+     if(!loading && !accessToken)
+     {
+
+     }
+   },[accessToken,loading])
+
+  return (
+      <Switch>
       <Route  path ='/' exact>
       <Layout>
           <Homescreen/>
@@ -58,7 +66,7 @@ const App = () => {
       </Route>
 
      </Switch>
-    </Router>
+    
   );
 };
 

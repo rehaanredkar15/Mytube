@@ -1,14 +1,19 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./_loginscreen.scss";
-import { useDispatch} from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { login } from './../../redux/action/auth.action';
-
+import {useHistory} from 'react-router-dom';
 
 
 
 const LoginScreen = () => {
 
-  const dispatch = useDispatch()  //use dispatch hook
+  const dispatch = useDispatch()  
+
+   
+   //to Read data from store we will require useSelector hook
+  const accessToken = useSelector(state => state.auth.accessToken)
+
 
   const handleLogin=()=>{
 
@@ -16,6 +21,21 @@ const LoginScreen = () => {
     
     dispatch(login())
   }
+
+ 
+
+  const history = useHistory();
+
+
+  //when acessToken is not null we will redirect
+
+  useEffect(() => {
+     
+     if(accessToken){
+
+        history.push('/')
+     }
+  }, [accessToken,history])
   return (
     <div className="login">
      
