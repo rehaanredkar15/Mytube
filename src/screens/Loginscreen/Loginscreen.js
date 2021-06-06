@@ -2,6 +2,10 @@ import React from "react";
 import "./_loginscreen.scss";
 import { useDispatch} from "react-redux";
 import { login } from './../../redux/action/auth.action';
+
+
+
+
 const LoginScreen = () => {
 
   const dispatch = useDispatch()  //use dispatch hook
@@ -21,7 +25,7 @@ const LoginScreen = () => {
           src="https://1.bp.blogspot.com/-nOuBEwrQuu8/XVz350_NaZI/AAAAAAAAAlc/3ne3fqrd1ugo5TaPx4MVJ_mdr8UGJnKLwCPcBGAYYCw/s1600/TestyDeafeningCanine-size_restricted.gif"
           alt=" "
         />
-        <button onClick = {handleLogin()}>Login with Google </button>
+        <button onClick = {handleLogin}>Login with Google </button>
       </div>
     </div>
   );

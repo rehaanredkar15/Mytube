@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
 import auth from '../../firebase';
+import { Provider } from 'react-redux';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_PROFILE , LOGIN_FAIL} from './../actionType';
 
 
 
@@ -10,6 +12,15 @@ export const login = () => async dispatch => {
 
 
    try{
+     
+     dispatch({
+          
+          type:LOGIN_REQUEST,
+
+     })
+
+
+
 
     //  GoogleAuthProvider constructor gives the provider oject which is passed to signin function
 //   Creates a credential for Google. At least one of idToken and accessToken is required.
@@ -24,9 +35,31 @@ export const login = () => async dispatch => {
        
        console.log(res)
 
+        const accessToken= res.credential.accessToken
+        const profile={
+            name: res.additionalUserInfo.profile.displayName,
+            photoURL : res.additionalUserInfo.profile.photoURL,
+        }
+
+        dispatch({
+            type:LOGIN_SUCCESS,
+            payload:accessToken
+        })
+        
+        dispatch({
+
+            type:LOGIN_PROFILE,
+            payload:profile,
+        })
    }  
    catch(error)
-   {
+   { 
+        console.log(error.message)
+        dispatch({
+
+            type:LOGIN_FAIL,
+            payload:error.message,
+        })
 
    }
 
