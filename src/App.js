@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Header from "./components/header/header";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
-import { BrowserRouter as Router, Route,Switch, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch, Link, Redirect,useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 
@@ -38,9 +38,9 @@ const App = () => {
  
      if(!loading && !accessToken)
      {
-
+         history.push('/auth')
      }
-   },[accessToken,loading])
+   },[accessToken,loading,history])
 
   return (
       <Switch>

@@ -33,7 +33,7 @@ export const login = () => async dispatch => {
        
        const res = await auth.signInWithPopup(provider)
        
-       console.log(res)
+       
 
         const accessToken= res.credential.accessToken
         const profile={
@@ -54,7 +54,7 @@ export const login = () => async dispatch => {
    }  
    catch(error)
    { 
-        console.log(error.message)
+       
         dispatch({
 
             type:LOGIN_FAIL,
