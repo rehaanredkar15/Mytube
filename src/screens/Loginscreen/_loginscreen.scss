@@ -1,8 +1,7 @@
 @import '../../_base.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-* {
-    font-family: 'Poppins', sans-serig
-}
+div {
+    // 
 
 .login {
     height: 100vh;
@@ -33,6 +32,8 @@
         align-items: center;
         justify-content: center;
         align-items: center;
+        font-family: 'Poppins', sans-serif
+}
         button {
             padding: 0.8rem;
             margin-top: 1px;
