@@ -2,11 +2,11 @@
 import { LOGIN_REQUEST } from './../actionType';
 import { LOGIN_SUCCESS } from './../actionType';
 import {LOGIN_FAIL} from './../actionType';
-import { LOGIN_PROFILE } from './../actionType';
+import { LOGIN_PROFILE,LOG_OUT } from './../actionType';
 const initialState = {
-
-    accessToken:null,
-    user:null,
+ 
+    accessToken:sessionStorage.getItem('ytc-access-token')?sessionStorage.getItem('ytc-access-token'):null,
+    user:sessionStorage.getItem('ytc-user')? JSON.parse(sessionStorage.getItem('ytc-access-token')):null,
     loading:false
 }
 
@@ -44,6 +44,14 @@ export const authReducer = (prevState = initialState, action) =>{
             return {
                 ...prevState,
                  user:payload,
+            }
+    
+        case LOG_OUT:
+            
+            return{
+                ...prevState,
+                accessToken:null,
+                user:null,
             }
         default:
             return prevState
