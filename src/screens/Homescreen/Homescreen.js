@@ -9,10 +9,10 @@ const Homescreen = () => {
    
    const dispatch = useDispatch()
 
-  //  useEffect(() =>{
+   useEffect(() =>{
 
-  //      dispatch(getPopularVideos)
-  //  },[dispatch])
+       dispatch(getPopularVideos())
+   },[dispatch])
 
 
   return (
