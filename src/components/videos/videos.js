@@ -6,7 +6,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 const Videos = ({video}) => {
 
-  const {id,snippet:{channelId,channelTitle,title,pubshiledAt,thumbnails:{medium}},} = video
+  const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium}},} = video
  
     
     const [views,setviews ] = useState();
@@ -73,7 +73,9 @@ const Videos = ({video}) => {
       </div>
       <div className="video__detials">
         <span>
-          <AiFillEye className="ans" /> {numeral(views).format("0.a")} Views • {moment(pubshiledAt).fromNow()}
+          <AiFillEye className="ans" /> {numeral(views).format("0.a")} Views •   
+        </span>
+        <span>  {moment(publishedAt).fromNow()}
         </span>
       </div>
       <div className="video__channel">
