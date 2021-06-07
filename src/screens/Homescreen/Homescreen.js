@@ -1,9 +1,20 @@
-import React from "react";
+import { getPopularVideos } from './../../redux/action/videos.action';
+import { useDispatch } from 'react-redux';
+import React ,{useEffect} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Video from "../../components/videos/videos";
 import Categories from "../../components/Categories/categories";
 
 const Homescreen = () => {
+   
+   const dispatch = useDispatch()
+
+  //  useEffect(() =>{
+
+  //      dispatch(getPopularVideos)
+  //  },[dispatch])
+
+
   return (
     <>
       <Container>
