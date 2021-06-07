@@ -49,7 +49,7 @@ const Sidebar = ({ sidebar, handleToggle }) => {
       <hr />
       <ul onClick={logouthandler}>
         <MdExitToApp size={23} className="sidebar__icons" />
-        <span>Log Out</span>
+        <br/>Log Out
       </ul>
       <hr />
     </nav>

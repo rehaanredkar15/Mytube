@@ -6,7 +6,7 @@ import request from '../../api';
 export const getPopularVideos = () => async dispatch => {
 
    try{
-         console.log('ih');
+
 
        dispatch({
            type:HOME_VIDEOS_REQUEST,
@@ -18,7 +18,7 @@ export const getPopularVideos = () => async dispatch => {
 
               part:"snippet,contentDetails,statistics",
               chart:'mostPopular',
-              regionCode:'IN',
+              regionCode:'US',
               maxResults:20,  
               pageToken:'',
            },
@@ -32,6 +32,59 @@ export const getPopularVideos = () => async dispatch => {
 
               videos:data.items,
               nextPageToken:data.nextPageToken,
+              category:'All',
+          }
+
+      })
+   } 
+   catch(error)
+   {
+  
+     
+      dispatch({
+
+          type:HOME_VIDEOS_FAIL,
+          payload:error.message,
+      })
+   }
+
+
+}
+
+
+
+
+//For categories we want the videos related to a specific topic 
+export const getVideosByCategory = (keyword) => async (dispatch,getState) => {
+
+   try{
+        
+
+       dispatch({
+           type:HOME_VIDEOS_REQUEST,
+       })
+
+       const {data} = await request("/search",{
+
+         params: {
+
+              part:"snippet",
+              maxResults:20,  
+              pageToken:getState().homeVideos.nextPageToken,
+              q:keyword,
+              type:'video'
+           },
+       })
+    
+      dispatch({
+
+
+          type: HOME_VIDEOS_SUCCESS,
+          payload:{
+
+              videos:data.items,
+              nextPageToken:data.nextPageToken,
+              category:keyword,  //the videos of specific categorys
           }
 
       })

@@ -1,3 +1,5 @@
+import { getVideosByCategory } from './../../redux/action/videos.action';
+import { useDispatch } from 'react-redux';
 import React, { useState } from "react";
 import "./_categories.scss";
 
@@ -27,9 +29,13 @@ const Categories = () => {
   //to the elements inside the array to give the elements a stable identity
 
   const [activestate, setactivestate] = useState("All");
+  const dispatch = useDispatch()
+
+
 
   const handleclick = (value) => {
     setactivestate(value);
+    dispatch(getVideosByCategory(value))
   };
   return (
     <div className="Categories">

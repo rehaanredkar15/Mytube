@@ -15,7 +15,9 @@ const Videos = ({video}) => {
      
     const seconds = moment.duration(duration).asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
-
+    
+    const _videoId = id?.videoId || id;
+    //for categories bar we have id as a object so this was the bug
 
 
 
@@ -29,14 +31,14 @@ const Videos = ({video}) => {
 
         params:{
           part:'contentDetails,statistics',
-          id:id,
+          id:_videoId,
         }
       })
       setduration(items[0].contentDetails.duration);
       setviews(items[0].statistics.viewCount)
     }
     get_video_details();
-  },[id])
+  },[_videoId])
 
  //now we also require useeffect for channel icon
 
@@ -81,7 +83,7 @@ const Videos = ({video}) => {
       <div className="video__channel">
         <img
           src={channelIcon?.url}
-          alt=""
+          alt="channel icon"
         />
         <p> {channelTitle} </p>
       </div>
