@@ -1,32 +1,87 @@
-import React from "react";
+import React ,{useEffect ,useState} from "react";
 import "./_videos.scss";
 import { AiFillEye } from "react-icons/ai";
+import request from '../../api';
+import moment from 'moment';
+import numeral from 'numeral';
+const Videos = ({video}) => {
 
-const Videos = () => {
+  const {id,snippet:{channelId,channelTitle,title,pubshiledAt,thumbnails:{medium}},} = video
+ 
+    
+    const [views,setviews ] = useState();
+    const [duration,setduration ] = useState();
+    const [channelIcon, setchannelIcon] = useState();
+     
+    const seconds = moment.duration(duration).asSeconds()
+    const _duration = moment.utc(seconds * 1000).format('mm:ss')
+
+
+
+
+  //as the response data is not consistent therfore for the duration and views so we need useeffect hook
+
+  useEffect(() => {
+
+    const get_video_details = async() => {
+
+     const {data:{items}}=  await request('/videos',{
+
+        params:{
+          part:'contentDetails,statistics',
+          id:id,
+        }
+      })
+      setduration(items[0].contentDetails.duration);
+      setviews(items[0].statistics.viewCount)
+    }
+    get_video_details();
+  },[id])
+
+ //now we also require useeffect for channel icon
+
+   useEffect(() => {
+
+    const get_channel_icon = async() => {
+
+     const {data:{items}}=  await request('/channels',{
+
+        params:{
+          part:'snippet',
+          id:channelId,
+        }
+      })
+     setchannelIcon(items[0].snippet.thumbnails.default)
+    }
+    get_channel_icon();
+  },[channelId])
+  
+
+
   return (
     <div className="video">
       <div className="video__top">
         <img
-          src="https://i.ytimg.com/vi/DQ4r7HegRQw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAmT1_wHw2AQZl0az_-Adxewd5suQ"
-          alt=""
+          src={medium.url}
+          alt="Thumbnail of video"
         />
-        <span>05:43</span>
+        <span>{_duration}</span>
       </div>
 
       <div className="video__title">
-        Created by Hannah Baker welcome to your tapes{" "}
+        {title}
       </div>
       <div className="video__detials">
         <span>
-          <AiFillEye className="ans" /> 10m Views • 5days ago
+          <AiFillEye className="ans" /> {numeral(views).format("0.a")} Views • {moment(pubshiledAt).fromNow()}
         </span>
       </div>
       <div className="video__channel">
         <img
-          src="https://yt3.ggpht.com/ytc/AAUvwnhe7O9GvvpT9Xpju21bHY9He61Tpv-GT56cKVipzjs=s176-c-k-c0x00ffffff-no-rj-mo"
+          src={channelIcon?.url}
           alt=""
         />
-        <p> Marvel </p>
+        <p> {channelTitle} </p>
       </div>
     </div>
   );
