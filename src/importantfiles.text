@@ -3,3 +3,12 @@
         alt=" "
       /> */
 this iss the youtube gif 
+
+wasnt saving the previous state in reducer
+the bugs were authentication redirection , private roues were required
+local storage fiasco 
+on refresh the accesstoken was lost
+data from api is hard to decode 
+views format isnt correct 
+ getting the channel icon was hard task 
+ 

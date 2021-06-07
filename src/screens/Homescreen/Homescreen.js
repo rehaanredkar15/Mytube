@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { getPopularVideos } from './../../redux/action/videos.action';
 import { useDispatch } from 'react-redux';
 import React ,{useEffect} from "react";
@@ -14,15 +15,19 @@ const Homescreen = () => {
        dispatch(getPopularVideos())
    },[dispatch])
 
+  const {videos,} = useSelector(state => state.homeVideos)
+
+
+
 
   return (
     <>
       <Container>
         <Categories />
         <Row>
-          {[...new Array(20)].map(() => (
+          {videos.map((video) => (
             <Col lg={3} md={4}>
-              <Video />
+              <Video video={video} key ={video.id}/>
             </Col>
           ))}
         </Row>
