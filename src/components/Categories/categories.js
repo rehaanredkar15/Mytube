@@ -1,4 +1,4 @@
-import { getVideosByCategory } from './../../redux/action/videos.action';
+import { getVideosByCategory, getPopularVideos } from './../../redux/action/videos.action';
 import { useDispatch } from 'react-redux';
 import React, { useState } from "react";
 import "./_categories.scss";
@@ -35,7 +35,15 @@ const Categories = () => {
 
   const handleclick = (value) => {
     setactivestate(value);
+    if(value==='All'){
+
+        dispatch(getPopularVideos())
+    }
+    else{
+      
+
     dispatch(getVideosByCategory(value))
+    }
   };
   return (
     <div className="Categories">
