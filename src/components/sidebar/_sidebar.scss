@@ -7,6 +7,9 @@
         height: 90vh;
         padding-top: 2rem;
         transition: transform 0.3s ease-in;
+        position: sticky;
+        top:10vh;
+        left:0;
         font-family: 'Poppins';
         li {
             display: flex;
