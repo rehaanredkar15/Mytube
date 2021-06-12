@@ -43,7 +43,6 @@ const HomeScreen = () => {
                     </Col>
                  ))}
             //    <div className='spinner-border text-danger d-block mx-auto'></div>
-            // }
             className='row'>
             {!loading
                ? videos.map(video => (
@@ -51,7 +50,7 @@ const HomeScreen = () => {
                        <Video video={video} key={video.id} />
                     </Col>
                  ))
-               : console.log('con') }
+               : console.log(loading) }
          </InfiniteScroll>
       </Container>
    )

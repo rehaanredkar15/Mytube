@@ -66,10 +66,6 @@ const Videos = ({video}) => {
   return (
     <div className="video">
       <div className="video__top">
-        {/* <img
-          src={medium.url}
-          alt="Thumbnail of video"
-        /> */}
         <LazyLoadImage src={medium.url} effect = "blur" />
         <span className = 'video__top__duration'>{_duration}</span>
       </div>

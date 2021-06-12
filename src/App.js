@@ -4,6 +4,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
+import Watchscreen from "./screens/watchscreen/Watchscreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
 import { BrowserRouter as Router, Route,Switch, Link, Redirect,useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -59,7 +60,12 @@ const App = () => {
         <h1>Search </h1>
       </Layout>
       </Route>
-  
+
+      <Route path = '/watch/:id'>
+      <Layout>
+        <Watchscreen/>
+      </Layout>
+      </Route>
 
       <Route>
         <Redirect to ='/' />
