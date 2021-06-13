@@ -1,3 +1,4 @@
+import { commentListReducer } from './reducers/comments.reducer';
 import { homeVideoReducer, selectedVideoReducer } from './reducers/video.reducer';
 import { createStore,applyMiddleware,combineReducers } from "redux";
 import {composeWithDevTools } from 'redux-devtools-extension';
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     homeVideos:homeVideoReducer,
     selectedVideo:selectedVideoReducer,
     channelDetails:channelDetailsReducer,
+    commentList:commentListReducer,
 })
 const store = createStore(rootReducer,{},composeWithDevTools(applyMiddleware(thunk)))
 
