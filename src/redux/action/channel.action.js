@@ -46,7 +46,7 @@ export const checkSubscriptionStatus = (id) => async(dispatch,getState) => {
 
            params:{
                part:'snippet',
-                firChannelId: id,
+                forChannelId: id,
                 mine:true
            }, 
 
@@ -59,9 +59,11 @@ export const checkSubscriptionStatus = (id) => async(dispatch,getState) => {
        dispatch({
 
            type:SET_SUSBSCRIPTTION_STATUS,
+           payload:data.items.length !== 0
        })
 
-       console.log(data)
+
+    
    } catch (error) { 
        
        console.log(error.response.data)
