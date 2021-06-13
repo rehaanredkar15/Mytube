@@ -5,7 +5,7 @@ export const getChannelDetails  = (id) => async(dispatch) => {
    
 
    try {
-
+  
        dispatch({
            type:CHANNEL_DETAILS_REQUEST,
        })
