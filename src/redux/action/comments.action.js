@@ -1,4 +1,4 @@
-import { COMMENT_DETAILS_REQUEST, COMMENT_LIST_SUCCESS, COMMENT_LIST_FAIL, COMMENT_LIST_REQUEST } from './../actionType';
+import { COMMENT_DETAILS_REQUEST, COMMENT_LIST_SUCCESS, COMMENT_LIST_FAIL, COMMENT_LIST_REQUEST, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAIL } from './../actionType';
 import request from '../../api';
 
 export const getCommentsOfVideoById  = (id) => async(dispatch) => {
@@ -25,11 +25,11 @@ export const getCommentsOfVideoById  = (id) => async(dispatch) => {
        })
    } catch (error) { 
        
-       console.log(error.response.data)
+       console.log(error.response)
        dispatch({
 
            type:COMMENT_LIST_FAIL,
-           payload: error.response.data,
+           payload: error.response,
        })
        
    }
@@ -39,32 +39,40 @@ export const getCommentsOfVideoById  = (id) => async(dispatch) => {
 
 export const  addComment  = (id,text) => async(dispatch,getState) => {
    
-
    try {
-      
+       const obj ={
 
-       const obj
+           snippet:{
 
-       const { data } = await request('/commentThreads', {
+               videoId:id,
+                topLevelComment:{
+                    snippet:{
+                        textOriginal:text,
+                    },
+                },
+           },
+       }
+
+       await request('/commentThreads',obj,{
 
            params:{
                part:'snippet',
-                videoId:id
            },
+           header:{
+
+               Authorization: `Bearer ${getState().auth.accessToken}`
+           }
        })
        dispatch({
 
-           type:COMMENT_LIST_SUCCESS,
-           payload:data.items,
-           //first item which is recieved 
+           type:CREATE_COMMENT_SUCCESS,
        })
    } catch (error) { 
        
-       console.log(error.response.data)
        dispatch({
 
-           type:COMMENT_LIST_FAIL,
-           payload: error.response.data,
+           type:CREATE_COMMENT_FAIL,
+           payload: error.response.data.message,
        })
        
    }
