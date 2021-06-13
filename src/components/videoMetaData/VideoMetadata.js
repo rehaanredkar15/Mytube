@@ -1,28 +1,48 @@
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getChannelDetails, checkSubscriptionStatus } from './../../redux/action/channel.action';
+import { useEffect } from 'react';
 import React from 'react'
 import './_VideoMetadata.scss'
 import moment from 'moment';
 import numeral from 'numeral';
 import {MdThumbUp,MdThumbDown} from 'react-icons/md';
 import ShowMoreText from 'react-show-more-text'
-const VideoMetaData = () => {
+const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
+   const { channelId, channelTitle, description, title, publishedAt } = snippet
+   const { viewCount, likeCount, dislikeCount } = statistics
+   
+    const dispatch = useDispatch();
+   // const {snippet:channelSnippet,statistics:channelStatistics} = useSelector(state => state.channelDetails.channel )
+    const {data } = useSelector(state => state.channelDetails.channel )
+    
+
+
+    useEffect(()=> {
+        dispatch(getChannelDetails(channelId))
+      //   dispatch(checkSubscriptionStatus(channelId))
+    },[dispatch,channelId])
+
+  
+
    return (
-      <div className='videoMetaData py-2'>
+           <div className='videoMetaData py-2'>
          <div className='videoMetaData__top'>
-            <h5>Video Title</h5>
+            <h5>{title}</h5>
             <div className='d-flex justify-content-between align-items-center py-1'>
                <span>
-                  {numeral(10000).format('0.a')} Views •
-                  {moment('2020-06-6').fromNow()}
+                  {numeral(viewCount).format('0.a')} Views •
+                  {moment(publishedAt).fromNow()}
                </span>
 
                <div>
                   <span className='mr-3'>
                      <MdThumbUp size={26} />
-                     {numeral(10000).format('0.a')}
+                     {numeral(likeCount).format('0.a')}
                   </span>
                   <span className='mr-3'>
                      <MdThumbDown size={26} />
-                     {numeral(10000).format('0.a')}
+                     {numeral(dislikeCount).format('0.a')}
                   </span>
                </div>
             </div>
@@ -30,13 +50,13 @@ const VideoMetaData = () => {
          <div className='videoMetaData__channel d-flex justify-content-between align-items-center my-2 py-3'>
             <div className='d-flex'>
                <img
-                  src='https://www.seekpng.com/png/full/356-3562377_personal-user.png'
+                  // src={channelSnippet?.thumbnails?.default.url}
                   alt=''
-                  className='rounder-circle mr-3'
+                  className='rounded-circle mr-3'
                />
                <div className='d-flex flex-column'>
-                  <span> LOgan Paul</span>
-                  <span> {numeral(10000).format('0.a')} Subscribers</span>
+                  <span>{channelTitle}</span>
+                  <span> {numeral(1000).format('0.a')} Subscribers</span>
                </div>
             </div>
   
@@ -49,23 +69,7 @@ const VideoMetaData = () => {
                less='SHOW LESS'
                anchorClass='showMoreText'
                expanded={false}>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-               Doloremque cupiditate, aspernatur a modi, nostrum porro suscipit
-               vero est ratione pariatur eos atque dignissimos tempora autem
-               corporis officia optio, distinctio nisi in id? Eaque consectetur,
-               quas quaerat magni dicta qui non? Quod fugit inventore rem porro
-               quis, error quos qui nulla! Lorem ipsum dolor sit amet
-               consectetur adipisicing elit. Doloremque cupiditate, aspernatur a
-               modi, nostrum porro suscipit vero est ratione pariatur eos atque
-               dignissimos tempora autem corporis officia optio, distinctio nisi
-               in id? Eaque consectetur, quas quaerat magni dicta qui non? Quod
-               fugit inventore rem porro quis, error quos qui nulla! Lorem ipsum
-               dolor sit amet consectetur adipisicing elit. Doloremque
-               cupiditate, aspernatur a modi, nostrum porro suscipit vero est
-               ratione pariatur eos atque dignissimos tempora autem corporis
-               officia optio, distinctio nisi in id? Eaque consectetur, quas
-               quaerat magni dicta qui non? Quod fugit inventore rem porro quis,
-               error quos qui nulla!
+                 {description}
             </ShowMoreText>
          </div>
       </div>
