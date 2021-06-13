@@ -45,12 +45,12 @@ export const checkSubscriptionStatus = (id) => async(dispatch,getState) => {
        const { data } = await request('/channels', {
 
            params:{
-               part:'snippet,statistics,contentDetails',
+               part:'snippet',
                 firChannelId: id,
                 mine:true
            }, 
 
-           header:{
+           headers:{
 
             Authorization:`Bearer ${getState().auth.accessToken}`,
            }

@@ -13,18 +13,18 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
    const { viewCount, likeCount, dislikeCount } = statistics
    
     const dispatch = useDispatch();
-   // const {snippet:channelSnippet,statistics:channelStatistics} = useSelector(state => state.channelDetails.channel )
-    const {data } = useSelector(state => state.channelDetails.channel )
+    const {snippet:channelSnippet,statistics:channelStatistics} = useSelector(state => state.channelDetails.channel )
+    
     
 
 
     useEffect(()=> {
         dispatch(getChannelDetails(channelId))
-      //   dispatch(checkSubscriptionStatus(channelId))
+        dispatch(checkSubscriptionStatus(channelId))
     },[dispatch,channelId])
 
   
-
+ 
    return (
            <div className='videoMetaData py-2'>
          <div className='videoMetaData__top'>
@@ -50,13 +50,13 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
          <div className='videoMetaData__channel d-flex justify-content-between align-items-center my-2 py-3'>
             <div className='d-flex'>
                <img
-                  // src={channelSnippet?.thumbnails?.default.url}
+                  src={channelSnippet?.thumbnails?.default.url}
                   alt=''
                   className='rounded-circle mr-3'
                />
                <div className='d-flex flex-column'>
                   <span>{channelTitle}</span>
-                  <span> {numeral(1000).format('0.a')} Subscribers</span>
+                  <span> {numeral(channelStatistics?.subscriberCount).format('0.a')} Subscribers</span>
                </div>
             </div>
   
