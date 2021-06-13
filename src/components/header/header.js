@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from "react";
 import "./_header.scss";
 import { FaBars } from "react-icons/fa";
@@ -8,16 +9,19 @@ import { MdNotifications, MdApps } from "react-icons/md";
 const Header = ({ handleToggle }) => {
   return (
     <div className=" header">
-      <FaBars
+      <FaBars  
         className="header__menu"
         size={26}
         onClick={() => handleToggle()}
       />
+      <Link to ='/'>
       <img
         src="https://betanews.com/wp-content/uploads/2017/08/new-youtube-logo.jpg"
         alt="Mytube logo"
+        
         className="header__logo"
       />{" "}
+      </Link>
       <form>
         <input type="text" placeholder="Search any youtube video" />
         <button type="submit">
