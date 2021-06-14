@@ -1,15 +1,13 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
- import { useState } from 'react';
-import { getCommentsOfVideoById } from './../../redux/action/comments.action';
-import moment from 'moment'
-import {addComment  } from './../../redux/action/comments.action';
-import './_comments.scss';
-const Comments = ({ comment }) => {
- 
-
-      const dispatch = useDispatch()
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+   addComment,
+   getCommentsOfVideoById,
+} from '../../redux/action/comments.action'
+import Comment from '../Comment/Comment'
+import './_comments.scss'
+const Comments = ({ videoId, totalComments }) => {
+   const dispatch = useDispatch()
 
    useEffect(() => {
       dispatch(getCommentsOfVideoById(videoId))
@@ -28,22 +26,33 @@ const Comments = ({ comment }) => {
       if (text.length === 0) return
 
       dispatch(addComment(videoId, text))
+
+      setText('')
    }
-
-
-
    return (
-      <div className='comment p-2 d-flex'>
-         <img
-            src={authorProfileImageUrl}
-            alt=''
-            className='mr-3 rounded-circle'
-         />
-         <div className='comment__body'>
-            <p className='mb-1 comment__header'>
-               {authorDisplayName} • {moment(publishedAt).fromNow()}
-            </p>
-            <p className='mb-0'>{textDisplay}</p>
+      <div className='comments'>
+         <p>{totalComments} Comments</p>
+         <div className='my-2 comments__form d-flex w-100'>
+            <img
+               src='https://www.seekpng.com/png/full/356-3562377_personal-user.png'
+               alt=''
+               className='mr-3 rounded-circle'
+            />
+            <form onSubmit={handleComment} className='d-flex flex-grow-1'>
+               <input
+                  type='text'
+                  className='flex-grow-1'
+                  placeholder='Write a comment...'
+                  value={text}
+                  onChange={e => setText(e.target.value)}
+               />
+               <button className='p-2 border-0'>Comment</button>
+            </form>
+         </div>
+         <div className='comments__list'>
+            {_comments?.map((comment, i) => (
+               <Comment comment={comment} key={i} />
+            ))}
          </div>
       </div>
    )

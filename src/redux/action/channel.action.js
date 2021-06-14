@@ -47,7 +47,7 @@ export const checkSubscriptionStatus = (id) => async(dispatch,getState) => {
            params:{
                part:'snippet',
                 forChannelId: id,
-                mine:true
+                mine:true,
            }, 
 
            headers:{

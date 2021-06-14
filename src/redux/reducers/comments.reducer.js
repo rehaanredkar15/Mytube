@@ -10,7 +10,7 @@ export const commentListReducer = (
     action
    ) => {
      
-     const {payload,type} = action
+     const {payload,type} = action 
 
      switch (type) { 
          case COMMENT_LIST_REQUEST:

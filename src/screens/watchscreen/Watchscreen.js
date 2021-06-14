@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import { getVideosById } from './../../redux/action/videos.action';
+import { getVideosById, getRelatedVideos } from './../../redux/action/videos.action';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import React from 'react'
 import VideoHorizontal from "../../components/VideoHorizontal/VideoHorizontal.js";
-import Comments from "../../components/comments/comments.js";
+import Comments from "../../components/Comments/Comments.js";
 import VideoMetadata from "../../components/videoMetaData/VideoMetadata.js";
 import {useParams } from 'react-router-dom';
 
@@ -22,9 +22,10 @@ const Watchscreen = () => {
     useEffect(() => {
 
         dispatch(getVideosById(id))
+        dispatch(getRelatedVideos(id))
     },[dispatch,id])
 
-
+    const {videos,loading:relatedVideosLoading} = useSelector(state => state.relatedVideos)
    const {video,loading} = useSelector(state => state.selectedVideo)
     return (
         <Row>
@@ -35,7 +36,7 @@ const Watchscreen = () => {
                   frameBorder='0'
                   title={video?.snippet?.title}
                   allowFullScreen
-                  width='800px'
+                  width='850px'
                   height='500vh'
                   ></iframe>
             </div>
@@ -44,13 +45,12 @@ const Watchscreen = () => {
             <h6>Loading.... </h6>
             
            }
-            <Comments videoId={id}  />
+            <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/>
          </Col> 
              <Col lg = {4}> 
-             { 
-              [...Array(20)].map(() =>(
+             { !loading && videos?.map(() =>(
                    
-                    <VideoHorizontal/>
+                    <VideoHorizontal video={video} key={video.id.videoId}/>
                ))}
               
              </Col>
