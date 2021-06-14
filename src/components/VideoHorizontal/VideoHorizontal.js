@@ -10,7 +10,18 @@ import {LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { Col, Row } from 'react-bootstrap'
 
-const VideoHorizontal = () => {
+const VideoHorizontal = ({video}) => {
+   const {id,
+   snippet:{
+       
+       channelId,
+       channelTitle,
+       description,
+       title,
+       publishedAt,
+       thumbnails
+
+   }} = video
    const seconds = moment.duration('100').asSeconds()
    const _duration = moment.utc(seconds * 1000).format('mm:ss')
 

@@ -48,7 +48,7 @@ const Watchscreen = () => {
             <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/>
          </Col> 
              <Col lg = {4}> 
-             { !loading && videos?.map(() =>(
+             { !loading && videos?.filter(video=>video.snippet).map(() =>(
                    
                     <VideoHorizontal video={video} key={video.id.videoId}/>
                ))}
