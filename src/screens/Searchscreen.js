@@ -22,8 +22,13 @@ const Searchscreen = () => {
         <Container>
              {
                 !loading ? (
-                    videos?.map(video => <VideoHorizontal video={video} key = {video.id.videoId} searchScreen/>)
-                ):
+               videos?.map(video => (
+               <VideoHorizontal
+                  video={video}
+                  key={video.id.videoId}
+                  searchScreen
+               />
+            ))):
                 (
                     <h1>loading....</h1>
                 )

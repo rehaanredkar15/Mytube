@@ -68,9 +68,9 @@ const App = () => {
       </Layout>
       </Route>
 
-      <Route>
+      {/* <Route>
         <Redirect to ='/' />
-      </Route>
+      </Route> */}
 
      </Switch>
     

@@ -16,6 +16,7 @@ const Header = ({ handleToggle }) => {
  
       e.preventDefault();
       history.push(`search/${input}`)
+
   }
   return (
     <div className=" header">
@@ -33,7 +34,12 @@ const Header = ({ handleToggle }) => {
       />{" "}
       </Link>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Search any youtube video" />
+         <input
+               type='text'
+               placeholder='Search'
+               value={input}
+               onChange={e => setInput(e.target.value)}
+            />
         <button type="submit">
           <AiOutlineSearch size={22} />
         </button>

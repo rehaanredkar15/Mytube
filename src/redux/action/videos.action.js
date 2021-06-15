@@ -191,9 +191,8 @@ export const getVideosBySearch = (keyword) => async (dispatch) => {
     
       dispatch({
           type: SEARCHED_VIDEO_SUCCESS,
-          payload:{
-              videos:data.items,
-          }
+          payload:data.items,
+          
       })
    } 
    catch(error)

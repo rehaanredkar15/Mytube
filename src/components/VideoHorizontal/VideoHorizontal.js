@@ -11,7 +11,7 @@ import {LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { Col, Row } from 'react-bootstrap'
 
-const VideoHorizontal = ({ video }) => {
+const VideoHorizontal = ({ video,searchScreen }) => {
    const {
       id,
       snippet: {
@@ -64,7 +64,6 @@ const VideoHorizontal = ({ video }) => {
 
    const history = useHistory()
    const handleClick = () => {
-      // TODO handle channel click
       history.push(`/watch/${id.videoId}`)
    }
 
@@ -72,8 +71,7 @@ const VideoHorizontal = ({ video }) => {
       <Row
          className='py-2 m-1 videoHorizontal align-align-items-center'
          onClick={handleClick}>
-         {/* //TODO refractor grid */}
-         <Col xs={6} md={6} className='videoHorizontal__left'>
+         <Col xs={6} md={searchScreen?4:6} className='videoHorizontal__left'>
             <LazyLoadImage
                src={medium.url}
                effect='blur'
@@ -82,7 +80,7 @@ const VideoHorizontal = ({ video }) => {
             />
             <span className='videoHorizontal__duration'>{_duration}</span>
          </Col>
-         <Col xs={6} md={6} className='p-0 videoHorizontal__right'>
+         <Col xs={6} md={searchScreen?8:6} className='p-0 videoHorizontal__right'>
             <p className='mb-1 videoHorizontal__title'>{title}</p>
             <div className='videoHorizontal__details'>
                <AiFillEye /> {numeral(views).format('0.a')} Views •
