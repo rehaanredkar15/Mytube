@@ -1,5 +1,6 @@
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import React from "react";
+import React,{useState} from "react";
 import "./_header.scss";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -7,6 +8,15 @@ import { MdNotifications, MdApps } from "react-icons/md";
 
 //handletoggle was the function passed as props
 const Header = ({ handleToggle }) => {
+
+  const [input,setInput] = useState('');
+
+  const history = useHistory();
+  const handleSubmit= (e) =>{
+ 
+      e.preventDefault();
+      history.push(`search/${input}`)
+  }
   return (
     <div className=" header">
       <FaBars  
@@ -22,7 +32,7 @@ const Header = ({ handleToggle }) => {
         className="header__logo"
       />{" "}
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="text" placeholder="Search any youtube video" />
         <button type="submit">
           <AiOutlineSearch size={22} />

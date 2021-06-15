@@ -15,5 +15,5 @@ export const SkeletonVideo = () => {
     )
 }
 
-//  default SkeletonVideo;
+
 

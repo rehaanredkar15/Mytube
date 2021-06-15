@@ -1,5 +1,6 @@
+import { Skeleton, SkeletonTheme } from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
-import { getVideosById, getRelatedVideos } from './../../redux/action/videos.action';
+import { getVideoById, getRelatedVideos } from './../../redux/action/videos.action';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Col } from 'react-bootstrap';
@@ -21,12 +22,16 @@ const Watchscreen = () => {
     
     useEffect(() => {
 
-        dispatch(getVideosById(id))
+        dispatch(getVideoById(id))
         dispatch(getRelatedVideos(id))
     },[dispatch,id])
 
-    const {videos,loading:relatedVideosLoading} = useSelector(state => state.relatedVideos)
-   const {video,loading} = useSelector(state => state.selectedVideo)
+    const { videos, loading: relatedVideosLoading } = useSelector(
+      state => state.relatedVideos
+   )
+
+   const { video, loading } = useSelector(state => state.selectedVideo)
+
     return (
         <Row>
               <Col >
@@ -48,11 +53,13 @@ const Watchscreen = () => {
             <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/>
          </Col> 
              <Col lg = {4}> 
-             { !loading && videos?.filter(video=>video.snippet).map(() =>(
-                   
-                    <VideoHorizontal video={video} key={video.id.videoId}/>
-               ))}
-              
+             { !loading && videos
+                  ?.filter(video => video.snippet)
+                  .map(video => (
+                     <VideoHorizontal video={video} key={video.id.videoId} />
+                  )) 
+                  
+                }
              </Col>
              
         </Row>

@@ -34,7 +34,7 @@ const Videos = ({video}) => {
      const {data:{items}}=  await request('/videos',{
 
         params:{
-          part:'contentDetails,statistics',
+          part:'contentDetails,statistics'    ,
           id:_videoId,
         }
       })

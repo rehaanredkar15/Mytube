@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
 import Watchscreen from "./screens/watchscreen/Watchscreen";
+import Searchscreen from "./screens/Searchscreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
 import { BrowserRouter as Router, Route,Switch, Link, Redirect,useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
@@ -55,9 +56,9 @@ const App = () => {
       <LoginScreen />
       </Route>
 
-      <Route path = '/search'>
+      <Route path = '/search/:query'>
       <Layout>
-        <h1>Search </h1>
+        <Searchscreen/>
       </Layout>
       </Route>
 

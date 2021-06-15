@@ -1,5 +1,5 @@
 import { log_out } from './auth.action';
-import { HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, RELATED_VIDEO_FAIL } from './../actionType';
+import { HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, RELATED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL } from './../actionType';
 import request from '../../api';
 
 
@@ -103,7 +103,7 @@ export const getVideosByCategory = (keyword) => async (dispatch,getState) => {
 
 }
 
-export const getVideosById = (id) => async(dispatch) => {
+export const getVideoById = (id) => async(dispatch) => {
    
 
    try {
@@ -158,15 +158,52 @@ export const getRelatedVideos = (id) => async(dispatch) => {
 
            type:RELATED_VIDEO_SUCCESS,
            payload:data.items,
-           //first item which is recieved 
+           
        })
    } catch (error) { 
-        console.log(error.response.data.message);
+        // console.log(error.response.data.message);
        dispatch({
            type:RELATED_VIDEO_FAIL,
            payload: error.message,
        })
        
    }
+
+}
+
+
+export const getVideosBySearch = (keyword) => async (dispatch) => {
+
+   try{
+       dispatch({
+           type:SEARCHED_VIDEO_REQUEST,
+       })
+
+       const {data} = await request("/search",{
+
+         params: {
+              part:"snippet",
+              maxResults:20,  
+              q:keyword,
+              type:'video,channel'
+           },
+       })
+    
+      dispatch({
+          type: SEARCHED_VIDEO_SUCCESS,
+          payload:{
+              videos:data.items,
+          }
+      })
+   } 
+   catch(error)
+   {
+      console.log(error.message)
+      dispatch({
+          type:SEARCHED_VIDEO_FAIL,
+          payload:error.message,
+      })
+   }
+
 
 }
