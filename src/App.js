@@ -7,6 +7,7 @@ import Homescreen from "./screens/Homescreen/Homescreen";
 import Watchscreen from "./screens/watchscreen/Watchscreen";
 import Searchscreen from "./screens/Searchscreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
+import Subscriptionscreen from './screens/Subscriptionscreen/Subscriptionscreen.js'
 import { BrowserRouter as Router, Route,Switch, Link, Redirect,useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
@@ -68,9 +69,15 @@ const App = () => {
       </Layout>
       </Route>
 
-      {/* <Route>
+      <Route path = '/feed/subscriptions'>
+      <Layout>
+        <Subscriptionscreen/>
+      </Layout>
+      </Route>
+
+      <Route>
         <Redirect to ='/' />
-      </Route> */}
+      </Route>
 
      </Switch>
     
