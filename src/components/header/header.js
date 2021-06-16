@@ -12,22 +12,17 @@ const Header = ({ handleToggle }) => {
   const [input,setInput] = useState('');
 
   const history = useHistory();
-  let search = null;
+
 
   const handleSubmit= (e) =>{
 
       
   
       e.preventDefault();
-      if(!search)
-      {
-      history.push(`search/${input}`)
-      }
-      else
-      {
-        history.push(`/${input}`)
-      }
-      search++;
+     
+      history.push(`/search/${input}`)
+
+     
   }
   return (
     <div className=" header">

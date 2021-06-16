@@ -4,6 +4,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { Container } from "react-bootstrap";
 import "./_app.scss";
 import Homescreen from "./screens/Homescreen/Homescreen";
+import ChannelScreen from "./screens/channelScreen/ChannelScreen";
 import Watchscreen from "./screens/watchscreen/Watchscreen";
 import Searchscreen from "./screens/Searchscreen";
 import LoginScreen from "./screens/Loginscreen/Loginscreen";
@@ -74,6 +75,13 @@ const App = () => {
         <Subscriptionscreen/>
       </Layout>
       </Route>
+
+       <Route path='/channel/:channelId'>
+            <Layout>
+               <ChannelScreen />
+            </Layout>
+         </Route>
+
 
       <Route>
         <Redirect to ='/' />
