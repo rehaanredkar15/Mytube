@@ -1,5 +1,5 @@
 import { log_out } from './auth.action';
-import { HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, RELATED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_SUCCESS } from './../actionType';
+import { HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, RELATED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_SUCCESS, CHANNEL_DETAILS_REQUEST, CHANNEL_DETAILS_SUCCESS, CHANNEL_DETAILS_FAIL } from './../actionType';
 import request from '../../api';
 
 
@@ -237,6 +237,39 @@ export const getSubscribedchannels = () => async (dispatch,getState) => {
      
       dispatch({
           type:SUBSCRIPTIONS_CHANNEL_FAIL,
+          payload:error.response.data,
+      })
+   }
+}
+
+
+export const getVideosByChannel = (id) => async (dispatch,getState) => {
+
+   try{
+       dispatch({
+           type:CHANNEL_DETAILS_REQUEST,
+       })
+
+       const {data:{items}} = await request("/channels",{
+
+         params: {
+              part:"contentDetails",
+              id:'id'
+           },
+            
+       })
+    console.log(items)
+    //   dispatch({
+    //       type: CHANNEL_DETAILS_SUCCESS,
+    //       payload:data.items,
+          
+    //   })
+   } 
+   catch(error)
+   {
+     
+      dispatch({
+          type:CHANNEL_DETAILS_FAIL,
           payload:error.response.data,
       })
    }
