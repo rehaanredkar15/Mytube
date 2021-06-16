@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from "react";
 import "./_sidebar.scss";
 import { useDispatch } from "react-redux";
@@ -34,10 +35,12 @@ const Sidebar = ({ sidebar, handleToggle }) => {
         <MdThumbUp size={23} className="sidebar__icons" />
         <p>liked Videos </p>
       </ul>
+      <Link to ='/feed/subscriptions'>
       <ul>
         <MdSubscriptions size={23} className="sidebar__icons" />
         <p>Subscriptions </p>
       </ul>
+      </Link >
       <ul>
         <MdLibraryBooks size={23} className="sidebar__icons" />
         <p>Library</p>

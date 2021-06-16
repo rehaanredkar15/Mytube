@@ -24,6 +24,8 @@ const VideoHorizontal = ({ video,searchScreen }) => {
       },
    } = video
 
+   const isVideo = id.kind === 'youtube#video'
+
    const [views, setViews] = useState(null)
    const [duration, setDuration] = useState(null)
    const [channelIcon, setChannelIcon] = useState(null)
@@ -64,36 +66,48 @@ const VideoHorizontal = ({ video,searchScreen }) => {
 
    const history = useHistory()
    const handleClick = () => {
-      history.push(`/watch/${id.videoId}`)
+
+      isVideo
+      ?history.push(`/watch/${id.videoId}`)
+      :history.push(`/channel/${id.channelId}`)
    }
 
+  const thumbnail = !isVideo && 'videoHorizontal_thumbnail-channel'
    return (
       <Row
-         className='py-2 m-1 videoHorizontal align-align-items-center'
+         className='py-2 m-1 videoHorizontal align-items-center'
          onClick={handleClick}>
          <Col xs={6} md={searchScreen?4:6} className='videoHorizontal__left'>
             <LazyLoadImage
                src={medium.url}
                effect='blur'
-               className='videoHorizontal__thumbnail'
+               className= {`videoHorizontal__thumbnail ${thumbnail}`}
                wrapperClassName='videoHorizontal__thumbnail-wrapper'
             />
+            {isVideo &&  (
+
             <span className='videoHorizontal__duration'>{_duration}</span>
+
+            ) }
          </Col>
          <Col xs={6} md={searchScreen?8:6} className='p-0 videoHorizontal__right'>
             <p className='mb-1 videoHorizontal__title'>{title}</p>
-            <div className='videoHorizontal__details'>
+           
+            {isVideo &&  <div className='videoHorizontal__details'>
                <AiFillEye /> {numeral(views).format('0.a')} Views •
                {moment(publishedAt).fromNow()}
             </div>
+            }
 
             <div className='my-1 videoHorizontal__channel d-flex align-items-center'>
-               {/* //TODO show in search screen */}
-               {/* <LazyLoadImage
-               src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
+              
+               {isVideo && (
+                <LazyLoadImage
+                src = {channelIcon}
                effect='blur'
+            />
+               )}
              
-            /> */}
                <p className='mb-0'>{channelTitle}</p>
             </div>
          </Col>
