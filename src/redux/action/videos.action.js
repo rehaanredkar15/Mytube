@@ -258,6 +258,8 @@ export const getVideosByChannel = (id) => async (dispatch,getState) => {
            },
             
        })
+
+       const uploadPaylistId = items[0].contentDetails.relatedPlaylists.uploads
     console.log(items)
     //   dispatch({
     //       type: CHANNEL_DETAILS_SUCCESS,
