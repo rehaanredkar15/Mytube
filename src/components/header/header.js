@@ -25,7 +25,7 @@ const Header = ({ handleToggle }) => {
      
   }
   return (
-    <div className=" header">
+    <div className="header">
       <FaBars  
         className="header__menu"
         size={26}

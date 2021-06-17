@@ -8,9 +8,9 @@ import numeral from 'numeral';
 import {LazyLoadImage } from 'react-lazy-load-image-component';
 
 
-const Videos = ({video}) => {
+const Videos = ({video , channelScreen}) => {
 
-  const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium}},} = video
+  const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium}},contentDetails,} = video
  
     
     const [views,setviews ] = useState();
@@ -20,7 +20,7 @@ const Videos = ({video}) => {
     const seconds = moment.duration(duration).asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
     const history = useHistory();   
-    const _videoId = id?.videoId || id;
+    const _videoId = id?.videoId || contentDetails?.videoId || id;
     //for categories bar we have id as a object so this was the bug
 
 
@@ -91,11 +91,12 @@ const Videos = ({video}) => {
         <span>  {moment(publishedAt).fromNow()}
         </span>
       </div>
-      <div className="video__channel">
+      { !channelScreen && 
+       <div className="video__channel">
         
         <LazyLoadImage src={channelIcon?.url} effect = "blur" />
         <p> {channelTitle} </p>
-      </div>
+      </div>}
     </div>
   );
 };

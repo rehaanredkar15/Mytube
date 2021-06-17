@@ -1,5 +1,5 @@
 import { commentListReducer } from './reducers/comments.reducer';
-import { homeVideoReducer, selectedVideoReducer, relatedVideoReducer, searchedVideosReducer, subscriptionChannelReducer } from './reducers/video.reducer';
+import { homeVideoReducer, selectedVideoReducer, relatedVideoReducer, searchedVideosReducer, subscriptionChannelReducer, channelVideosReducer } from './reducers/video.reducer';
 import { createStore,applyMiddleware,combineReducers } from "redux";
 import {composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
     commentList:commentListReducer,
     relatedVideos:relatedVideoReducer,
     searchedVideos:searchedVideosReducer,
-    subscriptionChannel:subscriptionChannelReducer
+    subscriptionChannel:subscriptionChannelReducer,
+    channelVideos: channelVideosReducer,
 })
 const store = createStore(rootReducer,{},composeWithDevTools(applyMiddleware(thunk)))
 

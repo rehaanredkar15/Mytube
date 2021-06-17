@@ -1,5 +1,5 @@
 import { log_out } from './auth.action';
-import { HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, RELATED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_SUCCESS, CHANNEL_DETAILS_REQUEST, CHANNEL_DETAILS_SUCCESS, CHANNEL_DETAILS_FAIL } from './../actionType';
+import { HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, SELECTED_VIDEO_FAIL, SELECTED_VIDEO_REQUEST, SELECTED_VIDEO_SUCCESS, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, RELATED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SUBSCRIPTIONS_CHANNEL_REQUEST, SUBSCRIPTIONS_CHANNEL_FAIL, SUBSCRIPTIONS_CHANNEL_SUCCESS, CHANNEL_DETAILS_REQUEST, CHANNEL_DETAILS_SUCCESS, CHANNEL_DETAILS_FAIL, CHANNEL_VIDEOS_FAIL, CHANNEL_VIDEOS_SUCCESS, CHANNEL_VIDEOS_REQUEST } from './../actionType';
 import request from '../../api';
 
 
@@ -219,7 +219,8 @@ export const getSubscribedchannels = () => async (dispatch,getState) => {
 
          params: {
               part:"snippet,contentDetails",
-              mine:'true'
+              mine:'true',
+              maxResults:20
            },
             headers: {
             Authorization: `Bearer ${getState().auth.accessToken}`,
@@ -243,36 +244,40 @@ export const getSubscribedchannels = () => async (dispatch,getState) => {
 }
 
 
-export const getVideosByChannel = (id) => async (dispatch,getState) => {
-
-   try{
-       dispatch({
-           type:CHANNEL_DETAILS_REQUEST,
-       })
-
-       const {data:{items}} = await request("/channels",{
-
-         params: {
-              part:"contentDetails",
-              id:'id'
-           },
-            
-       })
-
-       const uploadPaylistId = items[0].contentDetails.relatedPlaylists.uploads
-    console.log(items)
-    //   dispatch({
-    //       type: CHANNEL_DETAILS_SUCCESS,
-    //       payload:data.items,
-          
-    //   })
-   } 
-   catch(error)
-   {
-     
+export const getVideosByChannel = id => async dispatch => {
+   try {
       dispatch({
-          type:CHANNEL_DETAILS_FAIL,
-          payload:error.response.data,
+         type: CHANNEL_VIDEOS_REQUEST,
+      })
+
+      // 1. get upload playlist id
+      const {
+         data: { items },
+      } = await request('/channels', {
+         params: {
+            part: 'contentDetails',
+            id: id,
+         },
+      })
+      const uploadPlaylistId = items[0].contentDetails.relatedPlaylists.uploads
+      // 2. get the videos using the id
+      const { data } = await request('/playlistItems', {
+         params: {
+            part: 'snippet,contentDetails',
+            playlistId: uploadPlaylistId,
+            maxResults: 30,
+         },
+      })
+
+      dispatch({
+         type: CHANNEL_VIDEOS_SUCCESS,
+         payload: data.items,
+      })
+   } catch (error) {
+      console.log(error.response.data.message)
+      dispatch({
+         type: CHANNEL_VIDEOS_FAIL,
+         payload: error.response.data,
       })
    }
 }
