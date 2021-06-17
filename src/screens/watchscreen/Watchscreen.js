@@ -7,7 +7,7 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import React from 'react'
 import VideoHorizontal from "../../components/VideoHorizontal/VideoHorizontal.js";
-import Comments from "../../components/Comments/Comments.js";
+// import Comments from "../../components/Comments/Comments.js";
 import VideoMetadata from "../../components/videoMetaData/VideoMetadata.js";
 import {useParams } from 'react-router-dom';
 
@@ -50,7 +50,7 @@ const Watchscreen = () => {
             <h6>Loading.... </h6>
             
            }
-            <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/>
+            {/* <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/> */}
          </Col> 
              <Col lg = {4}> 
              { !loading && videos
