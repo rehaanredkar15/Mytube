@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
-import {Helmet} from 'react-helmet';
+
 import VideoHorizontal from "../../components/VideoHorizontal/VideoHorizontal.js";
 import Comments from "../../components/Comments/Comments.js";
 import VideoMetadata from "../../components/videoMetaData/VideoMetadata.js";
@@ -35,13 +35,13 @@ const Watchscreen = () => {
 
     return (
         <Row>
-          <Helmet>
+          {/* <Helmet>
              <title> 
              {video?.snippet?.title}
 
              </title>
  
-            </Helmet>
+            </Helmet> */}
           
               <Col >
             <div className='watchScreen__player mt-2'>
