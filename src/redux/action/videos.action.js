@@ -274,10 +274,10 @@ export const getVideosByChannel = id => async dispatch => {
          payload: data.items,
       })
    } catch (error) {
-      console.log(error.response.data.message)
+     
       dispatch({
          type: CHANNEL_VIDEOS_FAIL,
-         payload: error.response.data,
+        
       })
    }
 }

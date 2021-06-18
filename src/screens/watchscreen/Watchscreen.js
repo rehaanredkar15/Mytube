@@ -1,3 +1,4 @@
+import React from 'react'
 import { Skeleton, SkeletonTheme } from 'react-loading-skeleton';
 import { useSelector } from 'react-redux';
 import { getVideoById, getRelatedVideos } from './../../redux/action/videos.action';
@@ -5,9 +6,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
-import React from 'react'
+import {Helmet} from 'react-helmet';
 import VideoHorizontal from "../../components/VideoHorizontal/VideoHorizontal.js";
-// import Comments from "../../components/Comments/Comments.js";
+import Comments from "../../components/Comments/Comments.js";
 import VideoMetadata from "../../components/videoMetaData/VideoMetadata.js";
 import {useParams } from 'react-router-dom';
 
@@ -34,6 +35,14 @@ const Watchscreen = () => {
 
     return (
         <Row>
+          <Helmet>
+             <title> 
+             {video?.snippet?.title}
+
+             </title>
+ 
+            </Helmet>
+          
               <Col >
             <div className='watchScreen__player mt-2'>
                <iframe
@@ -50,7 +59,7 @@ const Watchscreen = () => {
             <h6>Loading.... </h6>
             
            }
-            {/* <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/> */}
+            <Comments videoId={id}  totalComments={video?.statistics?.commentCount}/>
          </Col> 
              <Col lg = {4}> 
              { !loading && videos

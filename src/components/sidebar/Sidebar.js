@@ -26,17 +26,18 @@ const Sidebar = ({ sidebar, handleToggle }) => {
       className={sidebar ? "sidebar open" : "sidebar"}
       onClick={() => handleToggle(false)}
     >
+      <Link to ='/'>
       <ul>
         <MdHome size={23} className="sidebar__icons" />
         <p>Home</p>
       </ul>
-
+      </Link>
       <ul>
         <MdThumbUp size={23} className="sidebar__icons" />
         <p>liked Videos </p>
       </ul>
       <Link to ='/feed/subscriptions'>
-      <ul>
+      <ul >
         <MdSubscriptions size={23} className="sidebar__icons" />
         <p>Subscriptions </p>
       </ul>
